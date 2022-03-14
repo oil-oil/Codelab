@@ -22,6 +22,7 @@
                         <a-collapse-item
                             :key="'2-' + index2"
                             v-for="(item2, index2) in item.children"
+                            :disabled="isDisable(index, index2)"
                         >
                             <template #header>
                                 <span
@@ -41,15 +42,16 @@
 </template>
 
 <script setup lang="ts">
-import "highlight.js/styles/atom-one-dark.css";
-import "./modest.scss";
+import 'highlight.js/styles/atom-one-dark.css'
+import './modest.scss'
 
-import useStep from "./hooks/useStep"
-import useRender from "./hooks/useRender"
+import useStep from './hooks/useStep'
+import useRender from './hooks/useRender'
 
 const { content, complieData } = useRender()
-const { currentStep, nextStep, isCurrentStep, isFinish, getPercent } = useStep(complieData)
-
+const {
+	currentStep, nextStep, isCurrentStep, isFinish, isDisable, getPercent
+} = useStep(complieData)
 
 </script>
 
