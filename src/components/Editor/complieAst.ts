@@ -93,6 +93,5 @@ export default function (ast: Token[]) {
 		)
 		return item
 	}))
-
 	return data
 }

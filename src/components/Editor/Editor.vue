@@ -7,8 +7,8 @@
             auto-size
         />
         <div class="preview-container">
-            <a-collapse expand-icon-position="right">
-                <a-collapse-item :key="'1-' + index" v-for="(item, index) in complieData">
+            <a-collapse expand-icon-position="right" :default-active-key="['0']">
+                <a-collapse-item :key="index+''" v-for="(item, index) in complieData" >
                     <template #header>
                         <a-space>
                             <a-progress type="circle" size="mini" :percent="getPercent(index)" />
@@ -18,16 +18,16 @@
                         </a-space>
                     </template>
 
-                    <a-collapse :bordered="false" expand-icon-position="right">
+                    <a-collapse expand-icon-position="right" ref="collapseRef" :active-key="levelExpand" >
                         <a-collapse-item
-                            :key="'2-' + index2"
+                            :key="index + '-' + index2"
                             v-for="(item2, index2) in item.children"
                             :disabled="isDisable(index, index2)"
                         >
                             <template #header>
                                 <span
                                     :class="{ 'line-through': isFinish(index, index2) }"
-                                >{{ item2.title }}</span>
+                                >{{ item2.title }}{{index + '-' + index2}}</span>
                             </template>
                             <div v-html="item2.content" />
                             <div class="flex justify-end" v-if="isCurrentStep(index, index2)">
@@ -42,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import 'highlight.js/styles/atom-one-dark.css'
 import './modest.scss'
 
@@ -50,8 +51,13 @@ import useRender from './hooks/useRender'
 
 const { content, complieData } = useRender()
 const {
-	currentStep, nextStep, isCurrentStep, isFinish, isDisable, getPercent
+	levelExpand, currentStep, nextStep, isCurrentStep, isFinish, isDisable, getPercent
 } = useStep(complieData)
+
+const collapseRef = ref()
+onMounted(() => {
+	console.log(collapseRef.value)
+})
 
 </script>
 
