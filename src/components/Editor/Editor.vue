@@ -7,7 +7,7 @@
             auto-size
         />
         <div class="preview-container">
-            <a-collapse expand-icon-position="right" :default-active-key="['0']">
+            <a-collapse expand-icon-position="right" v-model:active-key="level1Expand">
                 <a-collapse-item :key="index+''" v-for="(item, index) in complieData" >
                     <template #header>
                         <a-space>
@@ -18,7 +18,7 @@
                         </a-space>
                     </template>
 
-                    <a-collapse expand-icon-position="right" ref="collapseRef" :active-key="levelExpand" >
+                    <a-collapse expand-icon-position="right" ref="collapseRef" v-model:active-key="level2Expand" >
                         <a-collapse-item
                             :key="index + '-' + index2"
                             v-for="(item2, index2) in item.children"
@@ -51,7 +51,7 @@ import useRender from './hooks/useRender'
 
 const { content, complieData } = useRender()
 const {
-	levelExpand, currentStep, nextStep, isCurrentStep, isFinish, isDisable, getPercent
+	level1Expand, level2Expand, currentStep, nextStep, isCurrentStep, isFinish, isDisable, getPercent
 } = useStep(complieData)
 
 const collapseRef = ref()

@@ -17,6 +17,7 @@ module.exports = {
 		'@typescript-eslint'
 	],
 	rules: {
+		'vue/no-v-model-argument': 'off',
 		'no-mixed-spaces-and-tabs': 0,
 		indent: [2, 'tab'],
 		'no-tabs': 0

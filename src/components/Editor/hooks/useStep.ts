@@ -1,9 +1,15 @@
-import { nextTick, Ref, ref } from 'vue'
+import { Ref, ref, computed } from 'vue'
 import { complieData } from '../complieAst'
 
 export default function useStep (complieData: Ref<complieData>) {
 	const currentStep = ref([0, 0])
-	const levelExpand = ref(['0-0'])
+	const level1Expand = computed(() => {
+		return [currentStep.value[0] + '']
+	})
+	const level2Expand = computed(() => {
+		return [currentStep.value[0] + '-' + currentStep.value[1]]
+	})
+
 	const nextStep = () => {
 		if (
 			complieData.value[currentStep.value[0]].children.length - 1 ===
@@ -14,8 +20,6 @@ export default function useStep (complieData: Ref<complieData>) {
 		} else {
 			currentStep.value[1]++
 		}
-
-		levelExpand.value = ['0-' + currentStep.value[1]]
 	}
 
 	const isCurrentStep = (level1Step: number, level2Step: number) => {
@@ -58,7 +62,8 @@ export default function useStep (complieData: Ref<complieData>) {
 	}
 
 	return {
-		levelExpand,
+		level1Expand,
+		level2Expand,
 		currentStep,
 		nextStep,
 		isCurrentStep,
