@@ -5,10 +5,9 @@ import Editor from './components/Editor/Editor.vue'
 </script>
 
 <template>
-  <div>
-    <Editor />
-  </div>
+	<div>
+		<Editor />
+	</div>
 </template>
 
-<style>
-</style>
+<style></style>

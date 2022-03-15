@@ -13,7 +13,7 @@ export default function useStep (complieData: Ref<complieData>) {
 	const nextStep = () => {
 		if (
 			complieData.value[currentStep.value[0]].children.length - 1 ===
-      currentStep.value[1]
+			currentStep.value[1]
 		) {
 			currentStep.value[0]++
 			currentStep.value[1] = 0
@@ -31,8 +31,8 @@ export default function useStep (complieData: Ref<complieData>) {
 	const isFinish = (level1Step: number, level2Step: number) => {
 		if (
 			(level1Step === currentStep.value[0] &&
-        level2Step < currentStep.value[1]) ||
-      level1Step < currentStep.value[0]
+				level2Step < currentStep.value[1]) ||
+			level1Step < currentStep.value[0]
 		) {
 			return true
 		} else {
@@ -43,8 +43,8 @@ export default function useStep (complieData: Ref<complieData>) {
 	const isDisable = (level1Step: number, level2Step: number) => {
 		if (
 			(level1Step === currentStep.value[0] &&
-        level2Step > currentStep.value[1]) ||
-      level1Step < currentStep.value[0]
+				level2Step > currentStep.value[1]) ||
+			level1Step < currentStep.value[0]
 		) {
 			return true
 		}
@@ -57,8 +57,17 @@ export default function useStep (complieData: Ref<complieData>) {
 		} else {
 			return index < currentStep.value[0]
 				? 100
-				: parseFloat((currentStep.value[1] / (complieData.value[index].children.length - 1)).toFixed(1))
+				: parseFloat(
+					(
+						currentStep.value[1] /
+							(complieData.value[index].children.length - 1)
+					).toFixed(1)
+				  )
 		}
+	}
+
+	const resetStep = () => {
+		currentStep.value = [0, 0]
 	}
 
 	return {
@@ -69,6 +78,7 @@ export default function useStep (complieData: Ref<complieData>) {
 		isCurrentStep,
 		isFinish,
 		isDisable,
-		getPercent
+		getPercent,
+		resetStep
 	}
 }
