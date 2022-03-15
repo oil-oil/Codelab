@@ -28,14 +28,13 @@
 								:percent="getPercent(index)"
 							/>
 							<span :class="{ 'line-through': index < currentStep[0] }">{{
-								item.title
+								`${index + 1}. ${item.title}`
 							}}</span>
 						</a-space>
 					</template>
 
 					<a-collapse
 						expand-icon-position="right"
-						ref="collapseRef"
 						v-model:active-key="level2Expand"
 					>
 						<a-collapse-item
@@ -44,14 +43,9 @@
 							:disabled="isDisable(index, index2)"
 						>
 							<template #header>
-								<a-space>
-									<span :class="{ 'line-through': isFinish(index, index2) }"
-										>{{ item2.title }}
-									</span>
-									<span>
-										{{ index + '-' + index2 }}
-									</span>
-								</a-space>
+								<span :class="{ 'line-through': isFinish(index, index2) }"
+									>{{ `${index + 1}-${index2 + 1}. ${item2.title}` }}
+								</span>
 							</template>
 							<div v-html="item2.content" />
 							<div class="flex justify-end" v-if="isCurrentStep(index, index2)">
