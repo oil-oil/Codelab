@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue'
 import MarkdownIt from 'markdown-it'
-import complieAst from '../complieAst'
+import complieAst from '../utils/complieAst'
 const md: MarkdownIt = new MarkdownIt()
 
 export default function useComplie () {
